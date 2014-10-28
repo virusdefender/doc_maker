@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <title>
+        {% block title %}{% endblock %}
+    </title>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/bootstrap.min.css">
+    <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }}js/jstree.min.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/js_tree_style.min.css" />
+    <script src="{{ STATIC_URL }}js/json_process.js"></script>
+    <link href='{{ STATIC_URL }}css/json_process.css' media='all' rel='stylesheet' type='text/css' />
+    <style>
+    body {
+        padding-bottom: 60px;
+        padding-top: 20px;
+    }
+    </style>
+    {% block cssblock %}
+
+    {% endblock %}
+    {% block javascriptblock %}
+    {% endblock %}
+</head>
+<body>
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div id="tree"></div>
+            </div>
+            <div class="col-md-9">
+                {%  block content %}
+                {% endblock %}
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+<script>
+        $.ajax({
+            type: "get",
+            url: "/tree_data/?current_category={{ category_id }}",
+            success: function (data) {
+                var response_json = JSON.parse(data);
+                $.jstree.defaults.core.themes.responsive = true;
+                $('#tree').jstree({ 'core': {
+                    'data': response_json
+                } });
+                $('#tree').on('select_node.jstree', function (e, data) {
+                    id = data.selected[0]
+                    if(id[0] == 'a'){
+                        window.location.href = "/api/" + data.selected[0].split("_")[1] + "/";
+                    }
+                    else {
+                        window.location.href = "/category/" + data.selected[0] + "/";
+                    }
+                })
+                        .jstree();
+            },
+            error: function (data) {
+                alert("Failed to get tree data");
+            }
+        });
+
+    </script>
+</body>
+</html>

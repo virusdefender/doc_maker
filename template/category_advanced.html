@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}
+
+{% endblock %}
+{% block cssblock %}
+{% endblock %}
+{% block javascriptblock %}
+
+{% endblock %}
+
+{% block content %}
+    <h2>修改category</h2>
+
+    <form class="form" role="form" action="/category/{{ category.id }}/edit/" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <select class="form-control" name="parent_category">
+                {% for item in all_category %}
+                    {% ifequal item.id category.id %}
+                        <option selected="selected" value="{{ item.id }}">{{ item.name }}</option>
+                    {% else %}
+                        <option value="{{ item.id }}">{{ item.name }}</option>
+                    {% endifequal %}
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <input type="text" class="form-control" name="category_name" maxlength="20" placeholder="名称"
+                   value="{{ category.name }}">
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" name="category_content" rows="4"
+                      placeholder="说明">{% if category.content %}{{ category.content }}{% endif %}</textarea>
+        </div>
+        <button type="submit" class="btn btn-success">提交</button>
+    </form>
+    <h2>新增子分类</h2>
+    <form class="form" role="form" action="/category/{{ category.id }}/add_category/" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="text" class="form-control" name="category_name" maxlength="20" placeholder="名称">
+        </div>
+        <div class="form-group">
+            <textarea class="form-control" name="category_content" rows="4" placeholder="说明"></textarea>
+        </div>
+        <button type="submit" class="btn btn-success">新建子分类</button>
+    </form>
+
+{% endblock %}
