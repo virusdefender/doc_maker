@@ -86,7 +86,7 @@ STATIC_URL = '/static/'
 TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'template'),)
 
 #change it to you api base url
-API_BASE_URL = "http://127.0.0.1"
+API_BASE_URL = "http://"
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
