@@ -6,3 +6,7 @@ doc_maker
  2. 树形分类，默认全部折叠显示。
  3. 暂时只支持提交和获取json数据
  4. 初次使用请将doc_maker/settings.py里面的`API_BASE_URL`修改为实际地址，然后运行maker_main/view.py里面的create_data()创建根目录
+ 5. 基本功能齐全了，还在不断的完善中。
+  ![image](https://raw.githubusercontent.com/virusdefender/doc_maker/master/images/1.png)
+  ![image](https://raw.githubusercontent.com/virusdefender/doc_maker/master/images/2.png)
+   ![image](https://raw.githubusercontent.com/virusdefender/doc_maker/master/images/3.png)
