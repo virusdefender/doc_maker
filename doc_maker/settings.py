@@ -87,7 +87,7 @@ STATIC_URL = '/static/'
 TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'template'),)
 
 #change it to you api base url
-API_BASE_URL = "http://115.28.229.116"
+API_BASE_URL = "http://"
 
 LOGIN_EXEMPT_URLS = ["admin", "login"]
 
