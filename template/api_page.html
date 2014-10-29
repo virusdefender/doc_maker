@@ -64,6 +64,9 @@
                     编辑
                 </button>
             </div>
+            <form id="delete_api_page" action="/api/{{ api.id }}/delete/" style="display: none">
+                {% csrf_token %}
+            </form>
 
         </div>
 
@@ -73,10 +76,9 @@
         Process("raw_response_data", "formatted_response_data");
         function delete_api() {
             if (window.confirm('你确定要删除吗？')) {
-                alert("删除");
+                $("#delete_api_page")[0].submit();
                 return true;
             } else {
-                alert("取消");
                 return false;
             }
         }

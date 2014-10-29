@@ -43,6 +43,7 @@
 
     </div>
 {% endblock %}
+{% block tree_js %}
 <script>
         $.ajax({
             type: "get",
@@ -70,5 +71,6 @@
         });
 
     </script>
+{% endblock %}
 </body>
 </html>

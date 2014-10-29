@@ -45,6 +45,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'maker_main.middleware.LoginRequiredMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -86,7 +87,9 @@ STATIC_URL = '/static/'
 TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'template'),)
 
 #change it to you api base url
-API_BASE_URL = "http://"
+API_BASE_URL = "http://115.28.229.116"
+
+LOGIN_EXEMPT_URLS = ["admin", "login"]
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),

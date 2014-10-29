@@ -3,6 +3,7 @@ import json
 import requests
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render
+from django.contrib import auth
 from doc_maker.settings import API_BASE_URL
 from .forms import GetAPIDataForm, ApiObjectForm, EditApiObjectForm
 from .models import APIObject, Category
@@ -199,6 +200,24 @@ def edit_category(request, category_id):
     category.save()
     category.move(parent_category, "last-child")
     return HttpResponseRedirect("/category/" + str(parent_category.id) + "/")
+
+
+def delete_api_page(request, api_id):
+    APIObject.objects.filter(pk=api_id).delete()
+    return HttpResponseRedirect("/category/1/")
+
+
+def login(request):
+    if request.method == "GET":
+        return render(request, "login.html")
+    else:
+        username = request.POST.get("username", None)
+        password = request.POST.get("password", None)
+        user = auth.authenticate(username=username, password=password)
+        if user is not None and user.is_active:
+            auth.login(request, user)
+            return HttpResponse(json.dumps({"status": "success", "redirect": "/"}))
+        return HttpResponse(json.dumps({"status": "error"}))
 
 
 def create_data():

@@ -10,6 +10,8 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
 
+    url(r"^login/$", "maker_main.views.login"),
+
     url(r"^$", "maker_main.views.index"),
 
     url(r"^request_api/$", "maker_main.views.get_api_data"),
@@ -17,6 +19,8 @@ urlpatterns = patterns('',
     url(r"^api/(?P<api_id>\d+)/$", "maker_main.views.api_page"),
 
     url(r"^api/(?P<api_id>\d+)/edit/$", "maker_main.views.edit_api"),
+
+    url(r"^api/(?P<api_id>\d+)/delete/$", "maker_main.views.delete_api_page"),
 
     url(r"^tree_data/$", "maker_main.views.tree_data"),
 

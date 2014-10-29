@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}
+
+{% endblock %}
+{% block cssblock %}
+{% endblock %}
+{% block javascriptblock %}
+
+
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <form class="form-horizontal" role="form" id="login_form" action="/login/" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Username</label>
+
+                <div class="col-lg-6 ">
+                    <input type="text" class="form-control" name="username" placeholder="Username">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Password</label>
+
+                <div class="col-lg-6 ">
+                    <input type="password" class="form-control" name="password" placeholder="Password">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="button" class="btn btn-default" onclick="login()">Login</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+    function login() {
+            $.ajax({
+                type: "post",
+                url: $("form#login_form").attr("action"),
+                data: $("form#login_form").serialize(),
+                success: function(data){
+                    var response_json = JSON.parse(data);
+                    if(response_json.status == "success"){
+                        window.location.href = response_json.redirect
+                    }
+                    else{
+                        alert("Login failed!");
+                    }
+                },
+                error:function(data) {
+                    alert("Failed to submit data");
+                }
+            });
+     }
+    </script>
+{% endblock %}
+{% block tree_js %}{% endblock %}
