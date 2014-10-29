@@ -196,7 +196,7 @@ def edit_category(request, category_id):
     except Category.DoesNotExist:
         raise Http404
     category.name = name
-    category.content = request.POST.get("content", None)
+    category.content = request.POST.get("category_content", None)
     category.save()
     category.move(parent_category, "last-child")
     return HttpResponseRedirect("/category/" + str(parent_category.id) + "/")

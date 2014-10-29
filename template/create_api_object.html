@@ -62,7 +62,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">request data</label>
                     <div class="col-sm-10">
-                        <textarea class="form-control" rows="5" name="request_data" id="request_data"></textarea>
+                        <textarea class="form-control" rows="5" name="request_data" id="request_data" onchange='Process("request_data", "formatted_request_data")'></textarea>
                     </div>
                 </div>
                 <div>
@@ -77,7 +77,7 @@
                 <div class="form-group">
                     <label class="col-sm-2 control-label">response data</label>
                     <div class="col-sm-10">
-                        <textarea class="form-control" rows="5" name="response_data" id="response_data"></textarea>
+                        <textarea class="form-control" style="display: none" rows="5" name="response_data" id="response_data"></textarea>
                     </div>
                 </div>
                 <div>

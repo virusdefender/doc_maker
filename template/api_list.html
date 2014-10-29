@@ -13,7 +13,7 @@
     {% if category.content %}
         <div class="panel panel-default">
           <div class="panel-body">
-            {{ category.content }}
+            {{ category.content|safe }}
           </div>
         </div>
     {% endif %}
@@ -49,7 +49,7 @@
                             {% if item.description %}
                                 <div>
                                     <h3>description</h3>
-                                    <p>{{ item.description }}</p>
+                                    <p>{{ item.description|safe }}</p>
                                 </div>
                             {%  endif %}
                             <div>

@@ -17,7 +17,7 @@
             {% if api.description %}
                 <div>
                     <h3>description</h3>
-                    <p>{{ api.description }}</p>
+                    <p>{{ api.description|safe }}</p>
                 </div>
             {% endif %}
             <div>
