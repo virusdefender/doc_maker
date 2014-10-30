@@ -38,7 +38,7 @@
     <form class="form" role="form" action="/category/{{ category.id }}/add_category/" method="post">
         {% csrf_token %}
         <div class="form-group">
-            <input type="text" class="form-control" name="category_name" maxlength="20" placeholder="名称">
+            <input type="text" class="form-control" name="category_name" maxlength="28" placeholder="名称">
         </div>
         <div class="form-group">
             <textarea class="form-control" name="category_content" rows="4" placeholder="说明"></textarea>
