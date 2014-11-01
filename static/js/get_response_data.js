@@ -8,12 +8,11 @@ function get_response_data(){
             var response_json = JSON.parse(data);
             if(response_json.status == "success") {
                 $("#response_data")[0].value = response_json.data;
-                $("#response_status").html("<p>response status code:" + response_json.response_status_code + "</p>");
+                $("#response_status").html("<code>response status code:" + response_json.response_status_code + "</code>");
                 Process("request_data", "formatted_request_data");
                 Process("response_data", "formatted_response_data");
             }else{
-                $("#response_status").html("response status code:" + response_json.response_status_code + "</p>");
-                alert("Failed to get data");
+                alert("Failed to get data, reaponse status code is" + response_json.response_status_code);
             }
         },
         error: function(data){
