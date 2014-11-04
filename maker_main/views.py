@@ -12,10 +12,11 @@ from .models import APIObject, Category
 def request_api_data(url, method, data=None):
     url = API_BASE_URL + url
     headers = {"content-type": "application/json"}
-    s = requests.Session()
-    s.post(API_BASE_URL + "/login/", data={"username": "test", "password": "111111"})
+    login = requests.post(API_BASE_URL + "/login/", data={"username": "test", "password": "111111"}, headers=headers)
+    token = login.content["token"]
+    headers["HTTP_AUTHORIZATION"] = token
     if method == "GET":
-        r = s.get(url)
+        r = s.get(url, headers=headers)
     elif method == "POST":
         r = s.post(url, data=data, headers=headers)
     elif method == "PUT":
