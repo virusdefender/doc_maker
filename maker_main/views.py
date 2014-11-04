@@ -13,16 +13,16 @@ def request_api_data(url, method, data=None):
     url = API_BASE_URL + url
     headers = {"content-type": "application/json"}
     s = requests.Session()
-    r = s.post(API_BASE_URL + "/login/", data={"username": "test", "password": "111111"})
+    s.post(API_BASE_URL + "/login/", data={"username": "test", "password": "111111"})
     if method == "GET":
-        response = r.get(url)
+        r = s.get(url)
     elif method == "POST":
-        response = r.post(url, data=data, headers=headers)
+        r = s.post(url, data=data, headers=headers)
     elif method == "PUT":
-        response = r.put(url, data=data, headers=headers)
+        r = s.put(url, data=data, headers=headers)
     #DELETE
     else:
-        response = r.delete(url)
+        r = s.delete(url)
     try:
         return {"status": "success", "response_status_code": r.status_code, "data": r.content}
     except ValueError:
