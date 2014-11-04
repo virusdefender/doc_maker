@@ -12,15 +12,17 @@ from .models import APIObject, Category
 def request_api_data(url, method, data=None):
     url = API_BASE_URL + url
     headers = {"content-type": "application/json"}
+    s = requests.Session()
+    r = s.post(API_BASE_URL + "/login/", data={"username": "test", "password": "111111"})
     if method == "GET":
-        r = requests.get(url)
+        response = r.get(url)
     elif method == "POST":
-        r = requests.post(url, data=data, headers=headers)
+        response = r.post(url, data=data, headers=headers)
     elif method == "PUT":
-        r = requests.put(url, data=data, headers=headers)
+        response = r.put(url, data=data, headers=headers)
     #DELETE
     else:
-        r = requests.delete(url)
+        response = r.delete(url)
     try:
         return {"status": "success", "response_status_code": r.status_code, "data": r.content}
     except ValueError:
