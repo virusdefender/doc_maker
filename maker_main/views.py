@@ -13,7 +13,7 @@ def request_api_data(url, method, data=None):
     url = API_BASE_URL + url
     headers = {"content-type": "application/json"}
     login = requests.post(API_BASE_URL + "/login/", data={"username": "test", "password": "111111"}, headers=headers)
-    token = login.content["token"]
+    token = json.loads(login.content)["token"]
     headers["HTTP_AUTHORIZATION"] = token
     if method == "GET":
         r = s.get(url, headers=headers)
