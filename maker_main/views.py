@@ -12,18 +12,19 @@ from .models import APIObject, Category
 def request_api_data(url, method, data=None):
     url = API_BASE_URL + url
     headers = {"content-type": "application/json"}
-    login = requests.post(API_BASE_URL + "/login/", data={"username": "test", "password": "111111"}, headers=headers)
-    token = json.loads(login.content)["token"]
-    headers["HTTP_AUTHORIZATION"] = token
+    headers["Authorization"] = "Token e388bd61a99a08caabb5ef0ce2ebc776ace675a9"
+    cookies = {"csrftoken": "111111"}
+    headers["X_CSRFTOKEN"] = "111111"
     if method == "GET":
-        r = s.get(url, headers=headers)
+        r = requests.get(url, headers=headers, cookies=cookies)
     elif method == "POST":
-        r = s.post(url, data=data, headers=headers)
+        r = requests.post(url, data=data, headers=headers, cookies=cookies)
+        print r.request.headers
     elif method == "PUT":
-        r = s.put(url, data=data, headers=headers)
+        r = requests.put(url, data=data, headers=headers, cookies=cookies)
     #DELETE
     else:
-        r = s.delete(url)
+        r = requests.delete(url, headers=headers, cookies=cookies)
     try:
         return {"status": "success", "response_status_code": r.status_code, "data": r.content}
     except ValueError:
@@ -140,11 +141,11 @@ def tree_data(request):
                          "text": item.name,
                          "state": {"opened": True},
                          "icon": "glyphicon glyphicon-folder-open"}
-        node_api_data = APIObject.objects.filter(category=item)
+        node_api_data = APIObject.objects.filter(category=item).values("pk", "title")
         for api_item in node_api_data:
-            data.append({"id": "api_" + str(api_item.id),
+            data.append({"id": "api_" + str(api_item["pk"]),
                          "parent": str(item.id),
-                         "text": api_item.title,
+                         "text": api_item["title"],
                          "icon": "glyphicon glyphicon-file"})
         data.append(node_data)
     return HttpResponse(json.dumps(data))
