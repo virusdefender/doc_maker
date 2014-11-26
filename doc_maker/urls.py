@@ -11,6 +11,8 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     url(r"^login/$", "maker_main.views.login"),
+    
+    url(r"^search/$", "maker_main.views.search"),
 
     url(r"^$", "maker_main.views.index"),
 
