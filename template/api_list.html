@@ -101,6 +101,7 @@
         <div class="alert alert-warning" role="alert">暂无数据</div>
     {% endif %}
 
+    {% if category %}
     <div>
 
         <button type="button" class="btn btn-success"
@@ -114,6 +115,7 @@
 
 
     </div>
+    {% endif %}
     <script>
         $.each($("textarea"), function (i, val) {
             if (val.id[6] == 'q') {

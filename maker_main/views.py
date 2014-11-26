@@ -166,6 +166,15 @@ def category_page(request, category_id):
     return render(request, "api_list.html", {"api": api, "category": category})
 
 
+def search(request):
+    keyword = request.GET.get("keyword", None)
+    api = APIObject.objects.filter(title__icontains=keyword)
+    for item in api:
+        setattr(item, "raw_request_data", json.dumps(item.request_data))
+        setattr(item, "raw_response_data", json.dumps(item.response_data))
+    return render(request, "api_list.html", {"api": api})
+    
+
 def create_category(request, category_id):
     try:
         parent_category = Category.objects.get(pk=category_id)
