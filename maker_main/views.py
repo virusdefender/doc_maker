@@ -37,7 +37,7 @@ def get_api_data(request):
         if form.is_valid():
             r = request_api_data(form.cleaned_data["sample_url"],
                                  form.cleaned_data["method"],
-                                 form.cleaned_data["request_data"])
+                                 form.cleaned_data["request_data"].encode("utf8"))
             return HttpResponse(json.dumps(r))
         else:
             return HttpResponse(json.dumps({"status": "error", "content": "Invalid form"}), status=400)
