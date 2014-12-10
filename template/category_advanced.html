@@ -16,7 +16,7 @@
         <div class="form-group">
             <select class="form-control" name="parent_category">
                 {% for item in all_category %}
-                    {% ifequal item.id category.id %}
+                    {% ifequal item.p %}
                         <option selected="selected" value="{{ item.id }}">{{ item.name }}</option>
                     {% else %}
                         <option value="{{ item.id }}">{{ item.name }}</option>

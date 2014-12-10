@@ -193,6 +193,11 @@ def category_advanced(request, category_id):
     except Category.DoesNotExist:
         raise Http404
     all_category = Category.objects.all()
+    p = category.get_parent()
+    for item in all_category:
+        if item.id == p.id:
+            setattr(item, "p", True)
+            break
     return render(request, "category_advanced.html", {"category": category, "all_category": all_category})
 
 
