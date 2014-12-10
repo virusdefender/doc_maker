@@ -41,7 +41,7 @@
             <div class="form-group">
               <input type="text" class="form-control" placeholder="Search" id="search">
             </div>
-            <button type="button" class="btn btn-default" onclick="search()">搜索</button>
+            <button type="button" class="btn btn-default" onclick='window.location.href="/search/?keyword=" + $("#search")[0].value'>搜索</button>
           </form>
         </div>
       </div>
@@ -84,9 +84,6 @@
             }
         });
         
-        function search(){
-            window.location.href="/search/?keyword=" + $("#search")[0].value;
-        }
 
     </script>
 {% endblock %}
